@@ -1,172 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kick Bot Detector PRO</title>
-<style>
+  <meta charset="UTF-8">
+  <title>¿Quieres ser mi novia? 💖</title>
+  <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #1e1e2f;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-        padding: 20px;
+      margin: 0;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff4ecd, #ff8fd8, #7afcff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
-    .container {
-        max-width: 500px;
-        width: 100%;
-        background: #2a2a3e;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      animation: fadeIn 2s ease;
+      max-width: 350px;
     }
+
     h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #ff4f4f;
+      color: #ff2f92;
+      margin-bottom: 15px;
     }
-    input, button {
-        width: 100%;
-        padding: 12px;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: none;
-        font-size: 16px;
+
+    p {
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 30px;
     }
-    input {
-        background: #1e1e2f;
-        color: #fff;
-    }
+
     button {
-        background: #ff4f4f;
-        color: #fff;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.3s;
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+
+    .yes {
+      background: linear-gradient(135deg, #ff2f92, #ff7eb3);
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+      color: #555;
+    }
+
     button:hover {
-        background: #ff2a2a;
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    .results {
-        margin-top: 20px;
-        display: none;
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #ff2f92;
+      animation: float 6s infinite;
+      opacity: 0.7;
     }
-    .result-bar {
-        background: #555;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-bottom: 10px;
-        height: 24px;
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); }
+      100% { transform: translateY(-10vh) scale(1.2); }
     }
-    .real-bar {
-        background: #4caf50;
-        height: 100%;
-        width: 0%;
-        transition: width 0.7s;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
-    .bot-bar {
-        background: #f44336;
-        height: 100%;
-        width: 0%;
-        transition: width 0.7s;
-    }
-    .label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-    .info {
-        font-size: 14px;
-        color: #ccc;
-    }
-</style>
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>Kick Bot Detector PRO</h1>
-    <input id="channelInput" placeholder="Escribe el canal de Kick">
-    <button onclick="analyze()">Analizar canal</button>
-    <p class="info">*Basado en ratio chatters/viewers, estimación aproximada</p>
 
-    <div class="results" id="results">
-        <h2 id="channelName"></h2>
-        <p>Total viewers: <span id="totalViewers"></span></p>
+  <div class="card">
+    <h1>💘 ¿Quieres ser mi novia? 💘</h1>
+    <p>
+      No prometo perfección…<br>
+      pero sí risas, apoyo, cariño<br>
+      y muchas historias juntos 💕
+    </p>
 
-        <div class="label">
-            <span>Reales</span><span id="realPercent"></span>
-        </div>
-        <div class="result-bar">
-            <div class="real-bar" id="realBar"></div>
-        </div>
+    <button class="yes" onclick="sayYes()">Sí 💖</button>
+    <button class="no" onclick="moveButton(this)">No 😅</button>
+  </div>
 
-        <div class="label">
-            <span>Bots</span><span id="botPercent"></span>
+  <script>
+    function sayYes() {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          height:100vh;
+          text-align:center;
+          background:linear-gradient(135deg,#ff4ecd,#7afcff);
+          font-family:Arial;
+          color:white;
+        ">
+          <div>
+            <h1>💍💖 Sabía que dirías que sí 💖💍</h1>
+            <p style="font-size:22px;">Desde hoy… oficialmente mi novia 😍</p>
+          </div>
         </div>
-        <div class="result-bar">
-            <div class="bot-bar" id="botBar"></div>
-        </div>
-    </div>
-</div>
-
-<script>
-function extractChannel(input) {
-    input = input.trim().toLowerCase();
-    if (input.includes("kick.com")) {
-        let clean = input.replace("https://", "")
-                         .replace("http://", "")
-                         .replace("kick.com/", "")
-                         .replace("/", "");
-        return clean;
+      `;
     }
-    return input;
-}
 
-async function analyze() {
-    const input = document.getElementById("channelInput").value;
-    const channel = extractChannel(input);
-
-    if (!channel) return alert("Escribe un canal válido.");
-
-    try {
-        const res = await fetch(`https://kick.com/api/v2/channels/${channel}`);
-        const data = await res.json();
-
-        if (!data.livestream) {
-            alert("El canal no está en vivo");
-            return;
-        }
-
-        const total = data.livestream.viewer_count || 0;
-
-        const chatRes = await fetch(`https://kick.com/api/v2/channels/${channel}/chatroom`);
-        const chatData = await chatRes.json();
-        const chatters = chatData?.chatters_count || 0;
-
-        // Lógica mejorada: considera que muchos viewers no escriben
-        let ratio = chatters / (total || 1);
-        let estimatedRealPercent = Math.round(ratio * 100 + 30); // agregamos +30% por viewers silenciosos
-        if (estimatedRealPercent > 100) estimatedRealPercent = 100;
-        if (estimatedRealPercent < 10) estimatedRealPercent = 10;
-
-        const botPercent = 100 - estimatedRealPercent;
-
-        document.getElementById("results").style.display = "block";
-        document.getElementById("channelName").innerText = channel.toUpperCase();
-        document.getElementById("totalViewers").innerText = total;
-        document.getElementById("realPercent").innerText = estimatedRealPercent + "%";
-        document.getElementById("botPercent").innerText = botPercent + "%";
-        document.getElementById("realBar").style.width = estimatedRealPercent + "%";
-        document.getElementById("botBar").style.width = botPercent + "%";
-
-    } catch (e) {
-        alert("Error analizando el canal.");
-        console.log(e);
+    function moveButton(btn) {
+      btn.style.position = "absolute";
+      btn.style.top = Math.random() * 80 + "vh";
+      btn.style.left = Math.random() * 80 + "vw";
     }
-}
-</script>
+
+    // corazones flotando
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      heart.style.fontSize = (20 + Math.random() * 20) + "px";
+      document.body.appendChild(heart);
+    }
+  </script>
+
 </body>
 </html>
